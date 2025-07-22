@@ -797,7 +797,8 @@ bool PinholeProjection<DISTORTION_T>::initializeIntrinsics(const std::vector<Gri
   //   }
   // }
   // Manual setting of focal length (edited by alex)
-  if(f_guesses.empty()) {
+  // Print out the environment variable
+  std::cout << "KALIBR_MANUAL_FOCAL_LENGTH_INIT: " << std::getenv("KALIBR_MANUAL_FOCAL_LENGTH_INIT") << std::endl;
   const char* manual_input = std::getenv("KALIBR_MANUAL_FOCAL_LENGTH_INIT");
   if (manual_input != nullptr) {
     // parse the env‐var string as a double
@@ -816,7 +817,6 @@ bool PinholeProjection<DISTORTION_T>::initializeIntrinsics(const std::vector<Gri
               << std::endl;
     return false;
   }
-}
   // Get the median of the guesses if available.
   double f0 = PinholeHelpers::medianOfVectorElements(f_guesses);
 
